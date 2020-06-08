@@ -1,24 +1,19 @@
-package server.document;
+package server.dto;
 
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
 import java.util.Date;
 
 @Data
-public class Declaration {
-    @Id
-    String id;
-
+public class UserDeclarationResponse {
+    // Declaration
     String countriesVisited;
-
     Boolean isDomesticTravel;
     String fromProvince;
     String toProvince;
     Date departureDate;
     Date arrivalDate;
     String travelBy;
-
     // question 1
     Boolean sot;
     Boolean ho;
@@ -26,12 +21,10 @@ public class Declaration {
     Boolean viemPhoi;
     Boolean dauHong;
     Boolean metMoi;
-
     // question 2
     Boolean nguoiBenh;
     Boolean nguoiTuNuocCoBenh;
     Boolean nguoiCoBieuHien;
-
     // question 3
     Boolean benhGanManTinh;
     Boolean benhMauManTinh;
@@ -44,4 +37,13 @@ public class Declaration {
     Boolean tieuDuong;
     Boolean ungThu;
     Boolean mangThai;
+    // User
+    private String id;
+    private String cmnd;
+    private String cccd;
+    private String name;
+    private Date birthDay;
+    private String permanentAddress;
+    private Date cardDate;
+    private String cardPlace;
 }
