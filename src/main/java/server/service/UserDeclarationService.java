@@ -11,6 +11,7 @@ import server.repository.UserRepository;
 import server.util.NullableFieldBeanUtilsBean;
 
 import javax.annotation.Resource;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Optional;
 
@@ -30,7 +31,7 @@ public class UserDeclarationService {
         NullableFieldBeanUtilsBean.getInstance().copyProperties(declaration, requestBody.getDeclarationRequest());
 
         User target;
-        Optional<User> targetOptional = userRepository.findByCmndOrCccd(user.getCmnd(), user.getCccd());
+        Optional<User> targetOptional = userRepository.findByIdCardNumber(user.getIdCardNumber());
         if (targetOptional.isPresent()) {
             target = targetOptional.get();
             NullableFieldBeanUtilsBean.getInstance().copyProperties(target, user);
@@ -38,6 +39,7 @@ public class UserDeclarationService {
             target = user;
         }
 
+        declaration.setCreatedAt(new Date());
         Declaration savedDeclaration = declarationRepository.save(declaration);
         if (target.getDeclarations() == null) {
             target.setDeclarations(new HashSet<>());
@@ -49,5 +51,22 @@ public class UserDeclarationService {
         NullableFieldBeanUtilsBean.getInstance().copyProperties(response, savedUser);
         NullableFieldBeanUtilsBean.getInstance().copyProperties(response, savedDeclaration);
         return response;
+    }
+
+    public UserDeclarationResponse detail(String id) {
+        Optional<User> userOptional = userRepository.findByIdCardNumber(id);
+        if (userOptional.isPresent()) {
+            UserDeclarationResponse response = new UserDeclarationResponse();
+            Declaration declaration = userOptional.get()
+                    .getDeclarations()
+                    .stream()
+                    .max((u1, u2) -> (int) (u1.getCreatedAt().getTime() - u2.getCreatedAt().getTime()))
+                    .orElseGet(Declaration::new);
+            NullableFieldBeanUtilsBean.getInstance().copyProperties(response, userOptional.get());
+            NullableFieldBeanUtilsBean.getInstance().copyProperties(response, declaration);
+            return response;
+        } else {
+            return null;
+        }
     }
 }
