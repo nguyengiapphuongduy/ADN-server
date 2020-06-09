@@ -9,6 +9,7 @@ import java.util.Date;
 public class Declaration {
     @Id
     String id;
+    Date createdAt;
 
     String countriesVisited;
 

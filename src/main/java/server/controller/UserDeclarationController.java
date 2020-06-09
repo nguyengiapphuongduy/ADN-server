@@ -1,10 +1,7 @@
 package server.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import server.dto.UserDeclarationRequest;
 import server.dto.UserDeclarationResponse;
 import server.service.UserDeclarationService;
@@ -12,6 +9,7 @@ import server.service.UserDeclarationService;
 import javax.annotation.Resource;
 import javax.validation.ConstraintViolationException;
 import java.util.HashMap;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("user-declarations")
@@ -28,5 +26,12 @@ public class UserDeclarationController {
         } catch (ConstraintViolationException e) {
             return ResponseEntity.badRequest().body(new HashMap.SimpleEntry<>("message", e.getMessage()));
         }
+    }
+
+    @GetMapping
+    public ResponseEntity<UserDeclarationResponse> detail(@RequestParam String id) {
+        UserDeclarationResponse response = userDeclarationService.detail(id);
+        Optional<UserDeclarationResponse> responseOptional = Optional.ofNullable(response);
+        return ResponseEntity.of(responseOptional);
     }
 }
