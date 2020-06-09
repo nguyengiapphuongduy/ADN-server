@@ -10,6 +10,8 @@ import server.dto.UserDeclarationResponse;
 import server.service.UserDeclarationService;
 
 import javax.annotation.Resource;
+import javax.validation.ConstraintViolationException;
+import java.util.HashMap;
 
 @RestController
 @RequestMapping("user-declarations")
@@ -19,8 +21,12 @@ public class UserDeclarationController {
     private UserDeclarationService userDeclarationService;
 
     @PostMapping
-    public ResponseEntity<UserDeclarationResponse> saveOrUpdate(@RequestBody UserDeclarationRequest requestBody) {
-        UserDeclarationResponse responseBody = userDeclarationService.saveOrUpdate(requestBody);
-        return ResponseEntity.ok(responseBody);
+    public ResponseEntity<Object> saveOrUpdate(@RequestBody UserDeclarationRequest requestBody) {
+        try {
+            UserDeclarationResponse responseBody = userDeclarationService.saveOrUpdate(requestBody);
+            return ResponseEntity.ok().body(responseBody);
+        } catch (ConstraintViolationException e) {
+            return ResponseEntity.badRequest().body(new HashMap.SimpleEntry<>("message", e.getMessage()));
+        }
     }
 }

@@ -30,7 +30,7 @@ public class UserDeclarationService {
         NullableFieldBeanUtilsBean.getInstance().copyProperties(declaration, requestBody.getDeclarationRequest());
 
         User target;
-        Optional<User> targetOptional = userRepository.findByCmndOrCccd(user.getCmnd(), user.getCccd());
+        Optional<User> targetOptional = userRepository.findByIdCardNumber(user.getIdCardNumber());
         if (targetOptional.isPresent()) {
             target = targetOptional.get();
             NullableFieldBeanUtilsBean.getInstance().copyProperties(target, user);
