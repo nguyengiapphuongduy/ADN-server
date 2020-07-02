@@ -8,41 +8,41 @@ import java.util.Date;
 @Data
 public class Declaration {
     @Id
-    String id;
-    Date createdAt;
+    private String id;
+    private Date createdAt;
 
-    String countriesVisited;
+    private String countriesVisited;
 
-    Boolean isDomesticTravel;
-    String fromProvince;
-    String toProvince;
-    Date departureDate;
-    Date arrivalDate;
-    String travelBy;
+    private Boolean isDomesticTravel;
+    private String fromProvince;
+    private String toProvince;
+    private Date departureDate;
+    private Date arrivalDate;
+    private String travelBy;
 
     // question 1
-    Boolean sot;
-    Boolean ho;
-    Boolean khoTho;
-    Boolean viemPhoi;
-    Boolean dauHong;
-    Boolean metMoi;
+    private Boolean sot;
+    private Boolean ho;
+    private Boolean khoTho;
+    private Boolean viemPhoi;
+    private Boolean dauHong;
+    private Boolean metMoi;
 
     // question 2
-    Boolean nguoiBenh;
-    Boolean nguoiTuNuocCoBenh;
-    Boolean nguoiCoBieuHien;
+    private Boolean nguoiBenh;
+    private Boolean nguoiTuNuocCoBenh;
+    private Boolean nguoiCoBieuHien;
 
     // question 3
-    Boolean benhGanManTinh;
-    Boolean benhMauManTinh;
-    Boolean benhPhoiManTinh;
-    Boolean benhThanManTinh;
-    Boolean benhTimMach;
-    Boolean huyetApCao;
-    Boolean suyGiamMienDich;
-    Boolean ghepTangHoacXuong;
-    Boolean tieuDuong;
-    Boolean ungThu;
-    Boolean mangThai;
+    private Boolean benhGanManTinh;
+    private Boolean benhMauManTinh;
+    private Boolean benhPhoiManTinh;
+    private Boolean benhThanManTinh;
+    private Boolean benhTimMach;
+    private Boolean huyetApCao;
+    private Boolean suyGiamMienDich;
+    private Boolean ghepTangHoacXuong;
+    private Boolean tieuDuong;
+    private Boolean ungThu;
+    private Boolean mangThai;
 }
