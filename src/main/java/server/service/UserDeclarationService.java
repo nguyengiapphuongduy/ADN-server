@@ -29,6 +29,7 @@ public class UserDeclarationService {
         Declaration declaration = new Declaration();
         NullableFieldBeanUtilsBean.getInstance().copyProperties(user, requestBody.getUserRequest());
         NullableFieldBeanUtilsBean.getInstance().copyProperties(declaration, requestBody.getDeclarationRequest());
+        user.setIdCardNumber(user.getIdCardNumber().replace("[^0-9]", ""));
 
         User target;
         Optional<User> targetOptional = userRepository.findByIdCardNumber(user.getIdCardNumber());
