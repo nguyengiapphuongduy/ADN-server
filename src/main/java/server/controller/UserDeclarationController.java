@@ -28,8 +28,8 @@ public class UserDeclarationController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<UserDeclarationResponse> detail(@RequestParam String id) {
+    @GetMapping(path = "{id}")
+    public ResponseEntity<UserDeclarationResponse> detail(@PathVariable String id) {
         UserDeclarationResponse response = userDeclarationService.detail(id);
         Optional<UserDeclarationResponse> responseOptional = Optional.ofNullable(response);
         return ResponseEntity.of(responseOptional);
