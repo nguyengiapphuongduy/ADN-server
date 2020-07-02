@@ -69,7 +69,7 @@ public class OcrService {
                 if (userOptional.isPresent()) {
                     NullableFieldBeanUtilsBean.getInstance().copyProperties(person, userOptional.get());
                     person.setCardType(CardType.CMND);
-                    person.setCmnd(idOptional.get());
+                    person.setIdCardNumber(idOptional.get());
                     return person;
                 }
             }

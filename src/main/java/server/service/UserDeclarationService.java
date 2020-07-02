@@ -55,7 +55,7 @@ public class UserDeclarationService {
     }
 
     public UserDeclarationResponse detail(String id) {
-        Optional<User> userOptional = userRepository.findByIdCardNumber(id);
+        Optional<User> userOptional = userRepository.findByIdCardNumber(id.replaceAll("[^0-9]", ""));
         if (userOptional.isPresent()) {
             UserDeclarationResponse response = new UserDeclarationResponse();
             Declaration declaration = userOptional.get()
